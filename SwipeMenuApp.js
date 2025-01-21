@@ -1,27 +1,54 @@
+app.Script("Test.js")
+app.Script("SwipeMenu.js")
+app.Script("Config.js" ) // bör flyttas ut så att det är SwipeMenu som läser in den via config.js
+
 
 //Called when application is started.
 function OnStart()
 {    
+    //Run tests
+    test0()
+    
+    //Modified rows to read config
+    const theConfig=new Config()
+  
+    //debug to check the config text
+    app.ShowPopup(theConfig.getConfigText())
+    
+    
     //Lock screen orientation to Portrait.
     app.SetOrientation( "Portrait" )
     
 	//Create the main app layout with objects vertically centered.
 	layMain = app.CreateLayout( "Linear", "VCenter,FillXY" )
-	layMain.SetBackground( "/Res/drawable/android" )
+	layMain.SetBackground( "/Res/drawable/android" ) 
+	//layMain.SetBackground( theConfig.mainBackground ) //Har inte med drawern att göra så ska ur config utan är app config
 
 	//Create a text label and add it to main layout.
-	txt = app.CreateText( "<-- swipe from left" )
+    txt = app.CreateText( "<-- swipe from left" )
+    //txt = app.CreateText(  theConfig.getConfigItemValue("infoText") ) //Har inte med drawern att göra så ska ur config utan är app config?
 	txt.SetTextSize( 24, "dip" )
 	layMain.AddChild( txt )
 	
 	//Create a drawer containing a menu list.
-	CreateDrawer()
+	//CreateDrawer()
+
+    //Do the createion of the drawer via the class instead
+    //Plz note that the appa and the class share the app object.
+    const theSwipeMenu=new SwipeMenu("en_US",0.75,"Left")
+    drawerScroll=theSwipeMenu.CreateDrawer()
+    drawerWidth=theSwipeMenu.getDrawerWidth()
+    drawerSwipeDirection=theSwipeMenu.getSwipeDirection()
+    
+    
 	
 	//Add main layout and drawer to app.	
 	app.AddLayout( layMain )
-	app.AddDrawer( drawerScroll, "Left", drawerWidth )
+	app.AddDrawer( drawerScroll, drawerSwipeDirection, drawerWidth )
 }
 
+
+/*
 //Create the drawer contents.
 function CreateDrawer()
 {
@@ -45,14 +72,14 @@ function CreateDrawer()
 	layDrawerTop.AddChild( img )
 	
 	//Add user name to top layout.
-	var txtUser = app.CreateText( "Mikael Rundqvist",-1,-1,"Bold")
+	var txtUser = app.CreateText( "Dave Smart",-1,-1,"Bold")
 	txtUser.SetPosition( drawerWidth*0.07, 0.155 )
 	txtUser.SetTextColor( "White" )
 	txtUser.SetTextSize( 13.7, "dip" )
 	layDrawerTop.AddChild( txtUser )
 	
 	//Add user email to top layout.
-	txtEmail = app.CreateText( "mikael.rundqvist@gmail.com")
+	txtEmail = app.CreateText( "david@droidscript.org")
 	txtEmail.SetPosition( drawerWidth*0.07, 0.185 )
 	txtEmail.SetTextColor( "#bbffffff" )
 	txtEmail.SetTextSize( 14, "dip" )
@@ -91,6 +118,7 @@ function CreateDrawer()
     lstMenu2.SetOnTouch( lstMenu_OnTouch )
     layMenu.AddChild( lstMenu2 )
 }
+*/
 
 //Handle menu item selection.
 function lstMenu_OnTouch( title, body, type, index )

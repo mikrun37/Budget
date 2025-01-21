@@ -1,0 +1,4 @@
+TDD
+* Skapa tester
+* Låta dem gå röda
+* Utveckla och se till att de går grönt

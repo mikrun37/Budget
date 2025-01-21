@@ -1,0 +1,33 @@
+{
+"Lang":"en",
+"en_US": {
+    "app":{
+        "mainBackground":"/Res/drawable/android",
+        "InfoText":"<-- swipe from left"
+    },
+    "swipeMenu": {
+        "Logo": "/Sys/Img/Icon.png",
+        "swipeDirection":"left",
+        "txtUser":"Mikael Rundqvist",
+        "txtEmail":"mikael.rundqvist@gmail.com",
+        "Background":"/Sys/Img/GreenBack.jpg",
+        "drawerBackColor":"White"
+    }
+},
+  "sv_SE": {
+      "app":{
+        "mainBackground": "/Res/drawable/android",
+        "InfoText":"<-- svep från vänster"
+    },
+        "swipeMenu": {
+            "Logo": "/Sys/Img/Icon.png",
+            "mainBackground": "/Res/drawable/android",
+            "swipeDirection":"vänster",
+            "txtUser":"Mikael Rundqvist",
+            "txtEmail":"mikael.rundqvist@gmail.com",
+            "Background":"/Sys/Img/GreenBack.jpg",
+            "drawerBackColor":"White"
+        }
+  
+    }
+}
